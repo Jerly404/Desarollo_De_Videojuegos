@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocityX = -5;
             sr.flipX = true;
         }
-        
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.linearVelocityY = 12.5f;
+        }        
     }
 }
