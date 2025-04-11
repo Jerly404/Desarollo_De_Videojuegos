@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocityX = 5;
         }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            rb.linearVelocityX = -5;
+        }
         
     }
 }
