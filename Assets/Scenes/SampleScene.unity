@@ -4359,7 +4359,7 @@ MonoBehaviour:
   groundCheck: {fileID: 1637305902}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   jumpForce: 15
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
