@@ -1,51 +1,48 @@
 using UnityEngine;
 
-public class KunaiController: MonoBehaviour
+public class KunaiController : MonoBehaviour
 {
     private string direccion = "Derecha";
+    private PlayerController playerController;
 
-    Rigidbody2D rb;
-    SpriteRenderer sr;
+    private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
     void Start()
     {
-        // Initialize the Kunai object
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-
-        Destroy(this.gameObject, 5f);
+        Destroy(gameObject, 5f);
     }
 
     void Update()
     {
-        // Update the Kunai object
-        if (direccion == "Derecha")
-        {
-            rb.linearVelocityX = 15;
-            sr.flipY = false;
-            
-        }
-        else if (direccion == "Izquierda")
-        {
-            rb.linearVelocityX = -15;
-            sr.flipY = true;
-        }
-        
+        Vector2 vel = rb.linearVelocity;
+        vel.x = (direccion == "Derecha") ? 15f : -15f;
+        rb.linearVelocity = vel;
+        sr.flipX = (direccion == "Izquierda");
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // Handle collision with the Kunai object
-        if (collision.gameObject.CompareTag("Enemigo"))
+        if (collision.CompareTag("Enemigo"))
         {
+            // Notificar al PlayerController
+            if (playerController != null)
+                playerController.IncrementarContadorEnemigos();
+
             Destroy(collision.gameObject);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
-    public void SetDirection(string direction)
+    public void SetDirection(string dir)
     {
-        this.direccion = direction;
+        direccion = dir;
     }
-    
+
+    public void SetPlayerController(PlayerController controller)
+    {
+        playerController = controller;
+    }
 }
